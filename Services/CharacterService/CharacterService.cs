@@ -30,7 +30,8 @@ namespace Net.Services.CharacterService
         public async Task<ServiceResponse<Character>> GetCharacterById(int id)
         {
             var serviceResponse = new ServiceResponse<Character>();
-            serviceResponse.Data = characters.FirstOrDefault(c => c.Id == id);
+            var character = characters.FirstOrDefault(c => c.Id == id);
+            serviceResponse.Data = character;
             return serviceResponse;
         }
     }
