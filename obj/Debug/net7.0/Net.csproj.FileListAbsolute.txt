@@ -31,3 +31,5 @@
 /Users/ty/Net/obj/Debug/net7.0/Net.pdb
 /Users/ty/Net/obj/Debug/net7.0/Net.genruntimeconfig.cache
 /Users/ty/Net/obj/Debug/net7.0/ref/Net.dll
+/Users/ty/Net/bin/Debug/net7.0/AutoMapper.dll
+/Users/ty/Net/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

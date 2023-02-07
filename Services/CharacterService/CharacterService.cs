@@ -12,26 +12,30 @@ namespace Net.Services.CharacterService
             new Character {Id = 1, Name = "Sam"}
 
         };
-        public async Task<ServiceResponse<List<Character>>> AddCharacter(Character newCharacter)
+        private readonly IMapper _mapper;
+        public CharacterService(IMapper mapper)
         {
-            var serviceResponse = new ServiceResponse<List<Character>>();
+            _mapper = mapper;
+        }
+        public async Task<ServiceResponse<List<AddCharacterDto>>> AddCharacter(Character newCharacter)
+        {
+            var serviceResponse = new ServiceResponse<List<AddCharacterDto>>();
             characters.Add(newCharacter);
-            serviceResponse.Data = characters;
+            serviceResponse.Data = characters.Select(c => _mapper.Map<AddCharacterDto>(c)).ToList();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<Character>>> GetAllCharacters()
+        public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
-            var serviceResponse = new ServiceResponse<List<Character>>();
-            serviceResponse.Data = characters;
+            var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<Character>> GetCharacterById(int id)
+        public async Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id)
         {
-            var serviceResponse = new ServiceResponse<Character>();
-            var character = characters.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = character;
+            var serviceResponse = new ServiceResponse<GetCharacterDto>();
+            serviceResponse.Data = _mapper.Map<GetCharacterDto>(characters.FirstOrDefault(c => c.Id == id));
             return serviceResponse;
         }
     }
